@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 import Image from 'next/image';
-import img1 from "@/app/images/alisa-anton-TF_J4yTvg70-unsplash.jpg";
-import img2 from "@/app/images/candice-picard-MP0IUfwrn0A-unsplash.jpg";
-import img3 from "@/app/images/candice-picard-t0r8gxq4irQ-unsplash.jpg";
-import img4 from "@/app/images/nathan-dumlao-LG8_B2TIMV4-unsplash.jpg";
+import img1 from "../app/images/alisa-anton-TF_J4yTvg70-unsplash.jpg";
+import img2 from "../app/images/candice-picard-MP0IUfwrn0A-unsplash.jpg";
+import img3 from "../app/images/candice-picard-t0r8gxq4irQ-unsplash.jpg";
+import img4 from "../app/images/nathan-dumlao-LG8_B2TIMV4-unsplash.jpg";
 
 const SimpleSlider: FC = () => {
 

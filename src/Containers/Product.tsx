@@ -1,19 +1,23 @@
 
+'use client';
+
+import ProductInformation from "@/Components/ProductInformation";
 import dynamic from "next/dynamic";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 const ProductSlider = dynamic(() => import('../Components/ProductSlider'), {
     ssr: false,
-  });
+});
 
-interface ProductProps {
 
-}
+const Product: FC = () => {
 
-const Product: FC<ProductProps> = () => {
+
     return (
-        <div>
-            <ProductSlider/>
+        <div className='flex lg:flex-row flex-col lg:justify-between'>
+                 <ProductSlider />
+            <ProductInformation />
+       
         </div>
     )
 }
