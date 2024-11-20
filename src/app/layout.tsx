@@ -1,23 +1,31 @@
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
-import { config } from '@fortawesome/fontawesome-svg-core'
-import './globals.css';  
-import '@fortawesome/fontawesome-svg-core/styles.css' 
-config.autoAddCss = false;
+'use client'
 
-export default function RootLayout({
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+import { ReactNode } from 'react';
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from '../utils/queryClient';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import './globals.css';
+import { fetchCategories } from '@/hooks/useCategories';
+
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
+  // Fetch categories from the server
+  const data: Array<string> = await fetchCategories();
+
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+      <body className="min-h-screen flex flex-col">
+        <QueryClientProvider client={queryClient}>
+          {data.length>0 && <Navbar categories={data} />}
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </body>
     </html>
   );
