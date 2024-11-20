@@ -14,6 +14,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@splidejs/react-splide": "^0.7.12",
+    "@tanstack/react-query": "^5.59.19",
+    "@tanstack/react-query-devtools": "^5.59.19",
     "install": "^0.13.0",
     "next": "14.2.16",
     "npm": "^10.9.0",
@@ -25,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
     "eslint": "^8",

@@ -1,52 +1,57 @@
-'use client'
+'use client';
 
-import SkyImage from '@/app/images/karen-cantu-q-uYF7pziBO8Y-unsplash.jpg';
-import Scarf from '@/app/images/marvin-meyer-1wuQb199oQg-unsplash.jpg';
-import WarmScarf from '@/app/images/greta-arday-s2DVCOKqbBg-unsplash.jpg';
-import Hat from "@/app/images/oleg-ivanov-AA5DVdw2_yY-unsplash.jpg";
 import ProductCard from '@/Components/ProductCard';
 import SimpleSlider from '@/Components/SimpleSlider';
+import { FC } from 'react';
+import { Product } from '@/app/types';
 
-export default function Home() {
-  const fakeData = [{
-    id: 0,
-    name: "the sky birds Tshirt",
-    image: SkyImage,
-    price: 22000
-  },
-  {
-    id: 1,
-    name: "SCARF",
-    image: Scarf,
-    price: 1150
-  },
-  {
-    id: 2,
-    name: "Hat",
-    image: Hat,
-    price: 500
-  },
-  {
-    id: 3,
-    name: "Warm Scarf",
-    image: WarmScarf,
-    price: 8700
-  }]
-  
+
+interface HomeProps {
+  error:any,
+  isLoading:boolean,
+  data:Product[] | undefined
+}
+const Home: FC<HomeProps> = ({error , isLoading , data})=> {
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <section className="flex flex-col">
-      <SimpleSlider   />
-      <br/>
-      <br/>
-      <h3 className= 'font-bold text-center mb-4 text-lg'>New Collection</h3>
-      <br/>
-      <div className= "container mx-auto">
-        <div className= "flex justify-between gap-4">
-          {fakeData.map((item) => (
-            <ProductCard key={item.id} name={item.name} price={item.price} imageUrl={item.image} />
-          ))}
-        </div>
+      <SimpleSlider />
+      <br />
+      <br />
+      <h3 className='font-bold text-center mb-4 text-lg'>New Collection</h3>
+      <br />
+      <div className="container mx-auto lg:px-0 px-2">
+        {isLoading ? (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
+            {[0, 1, 2, 3].map((item, index) => {
+              return (
+                <div className="animate-pulse h-64 bg-slate-50 rounded-sm flex flex-col p-2 gap-2" key={index}>
+                  <div className='rounded-sm bg-slate-200 h-32 w-full'></div>
+                  <div className="rounded-lg bg-slate-200 h-4 w-2/3"></div>
+                  <div className="rounded-lg bg-slate-200 h-4 w-1/3"></div>
+                  <div className="rounded-lg bg-slate-200 h-10 w-1/3 mt-2"></div>
+                </div>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="grid  grid-cols-1 lg:grid-cols-4 gap-3">
+            {data && data.map((item: any) => (
+              <ProductCard
+                key={item.id}
+                id={item.id}
+                name={item.title}
+                price={item.price}
+                imageUrl={item.image}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
+export default  Home;
