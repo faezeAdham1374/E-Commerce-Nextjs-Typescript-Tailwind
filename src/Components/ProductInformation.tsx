@@ -1,8 +1,6 @@
-
-
-
 'use client';
 
+import { Product } from "@/app/types";
 import { FC, useState } from "react";
 
 interface ProductOption {
@@ -16,7 +14,7 @@ interface ProductOption {
 
 const product: ProductOption = {
     name: "Oversized Knit Sweater",
-    availableColors: ["Beige", "red", "green"],
+    availableColors: ["Beige", "Red", "Green"],
     sizes: ["S", "M", "L", "XL"],
     price: "$59.99",
     description:
@@ -24,8 +22,11 @@ const product: ProductOption = {
     productCode: "123456789",
 };
 
-const ProductInformation: FC = () => {
+interface ProductProps {
+    data: Product;
+}
 
+const ProductInformation: FC<ProductProps> = ({ data }) => {
     const [selectedColor, setSelectedColor] = useState<string>(product.availableColors[0]);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState<number>(1);
@@ -33,19 +34,20 @@ const ProductInformation: FC = () => {
     const handleAddToBasket = () => {
         alert(`Added ${quantity} ${product.name}(s) in ${selectedColor}, Size: ${selectedSize} to your basket.`);
     };
+
     return (
-        <div className='lg:w-1/2 w-full lg:m-8 m-2'>
+        <div className="lg:w-1/2 w-full lg:m-8 m-2">
             <div className="pe-4 mx-auto">
-                {/* Product Name */}
-                <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
+                <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
+                <p className="text-xl mb-4">{data.price} $</p>
+                <p className="text-gray-600 mb-4">{data.description}</p>
 
-                {/* Price */}
-                <p className="text-xl mb-4">{product.price}</p>
+                {/* Rating Section */}
+                <div className="flex items-center text-gray-700 mb-4">
+                    <span className="text-yellow-500 font-bold mr-1">{data.rating.rate}</span>
+                    <span className="font-light text-sm">({data.rating.count} reviews)</span>
+                </div>
 
-                {/* Description */}
-                <p className="text-gray-600 mb-4">{product.description}</p>
-
-                {/* Color Options */}
                 <div className="mb-4">
                     <label className="block font-medium mb-1">Color:</label>
                     <div className="flex space-x-2">
@@ -60,8 +62,6 @@ const ProductInformation: FC = () => {
                         ))}
                     </div>
                 </div>
-
-                {/* Size Selector */}
                 <div className="mb-4">
                     <label className="block font-medium mb-1">Size:</label>
                     <select
@@ -79,8 +79,6 @@ const ProductInformation: FC = () => {
                         ))}
                     </select>
                 </div>
-
-                {/* Quantity Selector */}
                 <div className="mb-4">
                     <label className="block font-medium mb-1">Quantity:</label>
                     <input
@@ -91,8 +89,6 @@ const ProductInformation: FC = () => {
                         className="p-2 border rounded w-full"
                     />
                 </div>
-
-                {/* Add to Basket Button */}
                 <button
                     onClick={handleAddToBasket}
                     disabled={!selectedSize}
@@ -100,13 +96,10 @@ const ProductInformation: FC = () => {
                 >
                     Add to Basket
                 </button>
-
-                {/* Product Code */}
                 <p className="text-sm text-gray-500 mt-4">Product Code: {product.productCode}</p>
             </div>
         </div>
-    )
-
-}
+    );
+};
 
 export default ProductInformation;

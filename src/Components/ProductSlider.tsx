@@ -37,7 +37,7 @@ const ProductSlider: React.FC = () => {
     };
 
     return (
-            <div className="w-full lg:w-1/2 lg:m-8">
+            <div className="w-full lg:w-1/2 lg:m-8 mt-2">
                 <Slider {...mainSettings} className="mainSlider h-60vh overflow-hidden">
                     {images.map((image, index) => (
                         <div key={index} className="w-full  bg-slate-100">
@@ -49,7 +49,7 @@ const ProductSlider: React.FC = () => {
                         </div>
                     ))}
                 </Slider>
-                <Slider {...thumbSettings} className="thumbSlider mt-2">
+                <Slider {...thumbSettings} className="thumbSlider mt-1 lg:mt-2">
                     {images.map((image, index) => (
                         <div key={index} className="w-full h-full p-1">
                             <Image
